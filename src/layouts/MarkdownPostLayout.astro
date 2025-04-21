@@ -1,0 +1,175 @@
+---
+import MainLayout from './MainLayout.astro';
+const { frontmatter } = Astro.props;
+---
+<MainLayout title={frontmatter.title} description={frontmatter.description}>
+  <article class="prose lg:prose-xl max-w-none">
+    <div class="mb-8">
+      <h1 class="text-3xl lg:text-4xl font-bold mb-4 text-primary">{frontmatter.title}</h1>
+      
+      <div class="flex flex-wrap items-center gap-2 mb-4 text-sm opacity-75">
+        <time datetime={frontmatter.pubDate.toString().slice(0,10)} class="bg-base-200 px-3 py-1 rounded-full">
+          {new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        </time>
+        
+        {frontmatter.tags && (
+          <div class="flex flex-wrap gap-2">
+            {frontmatter.tags.map((tag: string) => (
+              <span class="badge badge-soft badge-primary">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+      
+      <p class="text-lg italic mb-6 opacity-75">{frontmatter.description}</p>
+      
+      {frontmatter.image && frontmatter.image.url && (
+        <div class="my-8 overflow-hidden rounded-lg shadow-lg">
+          <img 
+            src={frontmatter.image.url} 
+            alt={frontmatter.image.alt || frontmatter.title} 
+            class="w-full h-auto object-cover" 
+          />
+        </div>
+      )}
+      
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-full bg-base-300 flex items-center justify-center text-lg font-bold">
+          {frontmatter.author.charAt(0)}
+        </div>
+        <span>Written by <span class="font-medium">{frontmatter.author}</span></span>
+      </div>
+      
+      <div class="w-full h-px bg-base-300 mb-8"></div>
+    </div>
+    
+    <div class="blog-content animate-in">
+      <slot />
+    </div>
+    
+    <div class="mt-12 pt-8 border-t border-base-300">
+      <div class="flex justify-between items-center">
+        <a href="/blog" class="btn btn-ghost gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+          </svg>
+          Back to all posts
+        </a>
+      </div>
+    </div>
+  </article>
+</MainLayout>
+
+<style is:global>
+  .blog-content h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: hsl(var(--p));
+  }
+  
+  .blog-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .blog-content p {
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+  }
+  
+  .blog-content ul, .blog-content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .blog-content li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .blog-content ul {
+    list-style-type: disc;
+  }
+  
+  .blog-content ol {
+    list-style-type: decimal;
+  }
+  
+  .blog-content a {
+    color: hsl(var(--s));
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: all 0.2s ease;
+  }
+  
+  .blog-content a:hover {
+    color: hsl(var(--p));
+  }
+  
+  .blog-content blockquote {
+    border-left: 4px solid hsl(var(--p));
+    padding-left: 1rem;
+    font-style: italic;
+    margin: 1.5rem 0;
+    opacity: 0.85;
+  }
+  
+  .blog-content code {
+    font-family: monospace;
+    background: hsl(var(--b2));
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+  }
+  
+  .blog-content pre {
+    background: hsl(var(--b1));
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+  
+  .blog-content pre code {
+    background: transparent;
+    padding: 0;
+  }
+  
+  .blog-content img {
+    max-width: 100%;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .blog-content hr {
+    margin: 2rem 0;
+    border: none;
+    height: 1px;
+    background: hsl(var(--b3));
+  }
+  
+  .animate-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

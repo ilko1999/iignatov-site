@@ -1,0 +1,85 @@
+---
+// Define mock data
+
+
+const workData = [
+  {
+    id: 1,
+    period: "Jan 2024 - Present",
+    company: "tbi Bank",
+    logo: "/images/tbibank_logo.jpg", // Updated path
+    role: "Frontend Developer",
+    achievements: [
+      "Core Developer of the Self-Service Portal, a platform that allows customers to manage their accounts, loans, deposits, and more. Technologies: Nuxt, RaspberryPi, TailwindCSS, TypeScript",
+      "Also on the team for the custom built inhouse banking system. Technologies: Vue, TailwindCSS, JavaScript",
+    ]
+  },
+  {
+    id: 2,
+    period: "May 2022 - Dec 2023",
+    company: "Accedia",
+    logo: "/images/accedia_logo.jpg", // Updated path
+    role: "(Junior) Software Consultant",
+    achievements: [
+      "Project - Titan Advisors - a project specialized in fund and asset management that utilizes various custom-created widgets that are constructed out of tables, graphs, and more. Technologies: React, .NET, MySQL, MaterialUI",
+      "Project - Alexander Forbes - specialized in retirement fund management, corporate health consulting, corporate risk management and insurance brokerage, investment solutions and asset management. Technologies: .Net and Azure)",
+
+    ],
+  },
+  {
+    id: 3,
+    period: "Jun 2021 - Apr 2022",
+    company: "Doxita",
+    logo: "/images/office.png", // Updated path
+    role: "Frontend Developer",
+    achievements: [
+      "Thanks to Doxita and thanks to the CEO I was able to dig deeper into the depths of frontend development and get my first experience with Vue.js and TailwindCSS. Here i was able to build from scratch a whole ecosystem for logistics management of a company called Novatiospace. Several PWAs and an admin module with various features."
+    ],
+    links: [
+      { name: "Novatiospace", url: "https://novatiospace.com/" }
+    ]
+  },
+  {
+    id: 4,
+    period: "Feb 2021 - May 2021",
+    company: "Recheck",
+    logo: "/images/recheck_bv_logo.jpg", // Updated path
+    role: "Frontend Developer (Intern)",
+    achievements: [
+      "Thanks to Recheck, I was able to learn about the basics of frontend development and get my first experience with React and JavaScript."
+    ],
+    links: [
+      { name: "Reference Letter", url: "/reference_letter.pdf" }
+    ]
+  }
+];
+
+const educationData = [
+  {
+    id: 1,
+    period: "2018 - 2022",
+    institution: "University of Ruse",
+    logo: "/images/uni_ruse_logo.png", 
+    degree: "Bachelor's degree in Computer Software Engineering",
+    achievements: [
+      "Specialization in Business Analytics, Project Management, Software Engineering, and Software Testing",
+      "Participated in competitive programming competitions"
+    ]
+  },
+];
+
+// Default tab
+let activeTab = Astro.props.activeTab || "work";
+
+// Import React component
+import ExperienceTabsReact from "./ExperienceTabsReact";
+---
+
+<div class="w-full mt-8">
+  <ExperienceTabsReact 
+    client:visible 
+    workData={workData} 
+    educationData={educationData} 
+    initialTab={activeTab} 
+  />
+</div> 

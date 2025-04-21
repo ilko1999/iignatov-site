@@ -1,0 +1,50 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import BlogPostGrid from '../components/BlogPostGrid';
+import AnimatedDivider from '../components/AnimatedDivider';
+// Get all blog posts
+const allPosts = await Astro.glob('./posts/*.mdx');
+// Sort by date
+const sortedPosts = allPosts.sort(
+  (a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+);
+---
+
+<MainLayout title="Blog | Iliyan Ignatov" description="Read my latest articles and thoughts">
+  <section class="py-12">
+    <div class="mb-12 text-center">
+      <h1 class="text-4xl font-bold mb-4 animate-in">Blog</h1>
+      <p class="text-lg opacity-70 max-w-2xl mx-auto">
+        Thoughts, ideas, and explorations on web development, technology, and design.
+      </p>
+    </div>
+
+    <AnimatedDivider client:load />
+    
+    {sortedPosts.length > 0 ? (
+      <BlogPostGrid client:load posts={sortedPosts} client:load />
+    ) : (
+      <div class="text-center py-16">
+        <h2 class="text-xl font-medium mb-2">No posts yet</h2>
+        <p class="opacity-70">Check back soon for new content!</p>
+      </div>
+    )}
+  </section>
+</MainLayout>
+
+<style>
+  .animate-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style> 

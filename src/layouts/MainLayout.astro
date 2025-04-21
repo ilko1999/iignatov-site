@@ -1,0 +1,108 @@
+---
+import "../styles/global.css";
+import AnimatedHeader from '../components/AnimatedHeader.jsx';
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { 
+	title = 'Iliyan Ignatov | Portfolio',
+	description = 'Personal portfolio website of Iliyan Ignatov',
+} = Astro.props;
+
+
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="forest">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="alternate" type="application/rss+xml" title="RSS Feed for Iliyan Ignatov's Blog" href="/rss.xml" />
+		<title>{title}</title>
+
+		
+	</head>
+	<body class="min-h-screen bg-base-100 text-base-content">
+		<AnimatedHeader client:load />
+		<div class="container mx-auto max-w-4xl px-4 py-8 mt-16 pb-24">
+			<main id="main-content">
+				<slot />
+			</main>
+			
+		</div>
+
+		<footer class="footer footer-center p-8 bg-base-200 text-base-content">
+			<div class="container mx-auto max-w-4xl">
+				<div class="grid grid-flow-col gap-4">
+					<a class="link link-hover" href="/rss.xml" target="_blank" rel="noopener noreferrer">RSS</a>
+				</div>
+				<div class="mt-4">
+					<p>&copy; {new Date().getFullYear()} Iliyan Ignatov. All rights reserved.</p>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			// Client-side animation setup with framer-motion DOM API
+			document.addEventListener('astro:page-load', () => {
+				import('framer-motion/dom').then(({ animate, stagger }) => {
+					// Stagger child elements animate-in
+					const elements = document.querySelectorAll('.animate-in');
+					if (elements.length > 0) {
+						animate(elements, 
+							{ opacity: [0, 1], y: [50, 0] }, 
+							{ 
+								delay: stagger(0.1), 
+								duration: 0.6, 
+								ease: 'easeOut' 
+							}
+						);
+					}
+
+					// Animate all elements with data-animate attribute
+					document.querySelectorAll('[data-animate]').forEach(element => {
+						const direction = element.getAttribute('data-direction') || 'up';
+						const delay = parseFloat(element.getAttribute('data-delay') || '0');
+						const type = element.getAttribute('data-type') || 'tween';
+						
+						let initialY = 0;
+						let initialX = 0;
+						
+						switch (direction) {
+							case 'up':
+								initialY = 50;
+								break;
+							case 'down':
+								initialY = -50;
+								break;
+							case 'left':
+								initialX = 50;
+								break;
+							case 'right':
+								initialX = -50;
+								break;
+						}
+						
+						animate(
+							element,
+							{ 
+								opacity: [0, 1], 
+								y: [initialY, 0],
+								x: [initialX, 0] 
+							},
+							{ 
+								delay: delay,
+								duration: 0.6, 
+								ease: 'easeOut' 
+							}
+						);
+					});
+				});
+			});
+		</script>
+	</body>
+</html> 

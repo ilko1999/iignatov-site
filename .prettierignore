@@ -1,0 +1,11 @@
+# Directories
+node_modules/
+dist/
+build/
+coverage/
+.astro/
+
+# Files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml 

@@ -1,16 +1,33 @@
 ---
-
+import MainLayout from '../layouts/MainLayout.astro';
+import ExperienceTabs from '../components/ExperienceTabs.astro';
+import IntroHeader from '../components/IntroHeader';
+import LatestBlogPosts from '../components/LatestBlogPosts';
+import AnimatedDivider from '../components/AnimatedDivider';
+const allPosts = Object.values(import.meta.glob('./posts/*.mdx', { eager: true }));
+const sortedPosts = allPosts.sort(
+	(a: any, b: any) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="Iliyan Ignatov | Portfolio" description="Personal portfolio website of Iliyan Ignatov">
+	<div data-animate data-delay="0" class="min-h-screen flex flex-col">
+		<IntroHeader client:load />
+
+		<div data-animate data-delay="0.4">
+			<ExperienceTabs activeTab="work" />
+		</div>
+
+		<AnimatedDivider client:load />
+
+		<LatestBlogPosts client:load posts={sortedPosts} />
+		
+	</div>
+</MainLayout>
+
+<style>
+  .wave-emoji {
+    display: inline-block;
+    transform-origin: 70% 70%;
+  }
+</style>
