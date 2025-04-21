@@ -35,16 +35,7 @@ const {
 			
 		</div>
 
-		<footer class="footer footer-center p-8 bg-base-200 text-base-content">
-			<div class="container mx-auto max-w-4xl">
-				<div class="grid grid-flow-col gap-4">
-					<a class="link link-hover" href="/rss.xml" target="_blank" rel="noopener noreferrer">RSS</a>
-				</div>
-				<div class="mt-4">
-					<p>&copy; {new Date().getFullYear()} Iliyan Ignatov. All rights reserved.</p>
-				</div>
-			</div>
-		</footer>
+		
 
 		<script>
 			// Client-side animation setup with framer-motion DOM API
@@ -104,5 +95,16 @@ const {
 				});
 			});
 		</script>
+		
 	</body>
+	<footer class="footer footer-center p-8  text-base-content	 w-full bottom-0">
+		<div class="container max-w-4xl">
+			<div class="grid grid-flow-col gap-4">
+				<a class="link link-hover badge badge-outline badge-primary" href="/rss.xml" target="_blank" rel="noopener noreferrer">RSS</a>
+			</div>
+			<aside class="mt-4">
+				<p>&copy; {new Date().getFullYear()} Iliyan Ignatov. All rights reserved.</p>
+			</aside>
+		</div>
+	</footer>
 </html> 
