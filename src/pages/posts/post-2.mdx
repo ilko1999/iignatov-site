@@ -1,0 +1,102 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Learning about Gravity'
+pubDate: 2025-05-12
+description: 'A simulation of the planets’ gravitational force'
+author: 'Iliyan'
+image:
+  url: '/images/gravity.png'
+  alt: 'An astronaut inspired by a famous artist'
+tags: ['js', 'physics', 'learning in public']
+---
+
+# Why did I decide to take on the long path of learning about physics and math on my own?
+
+Published on: 2025-05-12
+
+Welcome again to my domain. Long story short, I have this friend whom I really admire—he's like one of the smartest people in the world. _He literally discovered a planet, I mean..._ And so, while speaking to him, I wondered: why not just set aside my ego and try to animate physics to the best of my ability, without using AI or other physics engines?
+
+[My smart friends blog](https://astronasko.com)
+
+## Tools I used
+
+I didn’t use anything fancy—just JS, HTML, and PicoCSS for some nicer styling. I decided to use the built-in canvas in HTML because I thought defining matrices, x and y coordinates, velocity, and so on and so forth sounded more and more exhausting. I wanted to be done in just a couple of hours of coding.
+
+So, what is gravity? Basically, it pulls everything toward the ground (Earth). But in space, gravity acts kind of differently. Imagine space as a flat piece of cloth with no indentations, curves, or slopes—it’s a flat space. Now, imagine placing a very heavy object (a planet) in the middle. The cloth-like surface—space—starts curving and sloping toward the heavy planet, almost resembling a funnel. It essentially bends space-time.
+
+Then, if we place or roll another ball/planet toward the main planet, magically, like magnets, the heavier object attracts the smaller one. In other words, the bigger planet or star attracts the smaller planet, and the smaller planet begins orbiting around the star.
+
+I hope I described it adequately—I'm still not a physicist, sorry. :(
+
+### The simulation
+
+The canvas looks like this: it’s a basic white canvas, and wherever you hold down and release, a proportionally big ball/planet spawns into space-time. You can spawn as many balls as you like.
+
+![Initial state of the simulation](/images/initial-canvas.png)
+
+Here’s what an ordinarily, mildly populated canvas looks like:
+
+![Populated state of the simulation](/images/populated-canvas.png)
+
+And here is the simulation in action:
+
+![Playing the simulation](/images/simulation.gif)
+
+### This is my animation code with some comments explaining what the animation code does
+
+```js
+const animate = () => {
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw and update each circle
+    pastCircles.forEach((circle) => {
+      if (circle !== largestCircle) {
+        // Calculate distance between circles
+        const dx = largestCircle.x - circle.x;
+        const dy = largestCircle.y - circle.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // Prevent division by zero and too strong forces when very close
+        if (distance > largestCircle.radius + circle.radius) {
+          // Calculate gravitational force (proportional to radii product and inverse square of distance)
+          const forceMagnitude =
+            (gravity * largestCircle.radius * circle.radius) /
+            (distance * distance);
+
+          // Calculate force components
+          const forceX = (forceMagnitude * dx) / distance;
+          const forceY = (forceMagnitude * dy) / distance;
+
+          // Apply forces to velocity (smaller circles accelerate faster)
+          circle.vx += forceX / circle.radius;
+          circle.vy += forceY / circle.radius;
+        }
+
+        // Apply friction to gradually slow down
+        circle.vx *= 0.99;
+        circle.vy *= 0.99;
+
+        // Update position
+        circle.x += circle.vx;
+        circle.y += circle.vy;
+      }
+
+      // Draw the circle
+      ctx.beginPath();
+      ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
+      ctx.fillStyle = circle.color;
+      ctx.fill();
+      ctx.closePath();
+    });
+
+    // Continue animation
+    requestAnimationFrame(animate);
+  };
+
+  // Start the animation
+  animate();
+};
+```
+
+### Thank you for your attention, will add more projects ASAP 🫡
