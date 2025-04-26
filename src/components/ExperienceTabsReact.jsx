@@ -83,6 +83,26 @@ const WorkItem = ({ item, index }) => (
           ))}
         </motion.ul>
 
+        {/* Tech Skills Badges */}
+        {item.skills && item.skills.length > 0 && (
+          <motion.div
+            className="mt-4 flex flex-wrap gap-2"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.3,
+              delay: 0.7 + (item.achievements?.length || 0) * 0.05,
+              ease: 'easeOut',
+            }}
+          >
+            {item.skills.map((skill, idx) => (
+              <span key={idx} className="badge badge-primary badge-outline">
+                {skill}
+              </span>
+            ))}
+          </motion.div>
+        )}
+
         {item.links && item.links.length > 0 && (
           <motion.div
             className="mt-4 flex gap-2"
@@ -208,6 +228,26 @@ const EducationItem = ({ item, index }) => (
             </motion.li>
           ))}
         </motion.ul>
+
+        {/* Tech Skills Badges */}
+        {item.skills && item.skills.length > 0 && (
+          <motion.div
+            className="mt-4 flex flex-wrap gap-2"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.3,
+              delay: 0.7 + (item.achievements?.length || 0) * 0.05,
+              ease: 'easeOut',
+            }}
+          >
+            {item.skills.map((skill, idx) => (
+              <span key={idx} className="badge badge-primary badge-outline">
+                {skill}
+              </span>
+            ))}
+          </motion.div>
+        )}
       </div>
     </div>
   </motion.div>
