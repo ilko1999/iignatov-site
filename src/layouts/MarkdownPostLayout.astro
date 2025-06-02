@@ -1,8 +1,8 @@
 ---
-import MainLayout from './MainLayout.astro';
+import Base from './Base.astro';
 const { frontmatter } = Astro.props;
 ---
-<MainLayout title={frontmatter.title} description={frontmatter.description}>
+<Base title={frontmatter.title} description={frontmatter.description}>
   <article class="prose lg:prose-xl max-w-none">
     <div class="mb-8">
       <h1 class="text-3xl lg:text-4xl font-bold mb-4 text-primary">{frontmatter.title}</h1>
@@ -64,7 +64,7 @@ const { frontmatter } = Astro.props;
       </div>
     </div>
   </article>
-</MainLayout>
+</Base>
 
 <style is:global>
   .blog-content h2 {

@@ -1,5 +1,5 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
+import Base from '../layouts/Base.astro';
 import ExperienceTabs from '../components/ExperienceTabs.astro';
 import IntroHeader from '../components/IntroHeader';
 import LatestBlogPosts from '../components/LatestBlogPosts';
@@ -10,7 +10,7 @@ const sortedPosts = allPosts.sort(
 );
 ---
 
-<MainLayout title="Iliyan Ignatov | Portfolio" description="Personal portfolio website of Iliyan Ignatov">
+<Base title="Iliyan Ignatov | Portfolio" description="Personal portfolio website of Iliyan Ignatov">
 	<div data-animate data-delay="0" class="min-h-screen flex flex-col">
 		<IntroHeader client:load />
 
@@ -23,7 +23,7 @@ const sortedPosts = allPosts.sort(
 		<LatestBlogPosts client:load posts={sortedPosts} />
 		
 	</div>
-</MainLayout>
+</Base>
 
 <style>
   .wave-emoji {

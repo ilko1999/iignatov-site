@@ -1,5 +1,5 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
+import Base from '../layouts/Base.astro';
 import BlogPostGrid from '../components/BlogPostGrid';
 import AnimatedDivider from '../components/AnimatedDivider';
 // Get all blog posts
@@ -10,7 +10,7 @@ const sortedPosts = allPosts.sort(
 );
 ---
 
-<MainLayout title="Blog | Iliyan Ignatov" description="Read my latest articles and thoughts">
+<Base title="Blog | Iliyan Ignatov" description="Read my latest articles and thoughts">
   <section class="py-12">
     <div class="mb-12 text-center">
       <h1 class="text-4xl font-bold mb-4 animate-in">Blog</h1>
@@ -30,7 +30,7 @@ const sortedPosts = allPosts.sort(
       </div>
     )}
   </section>
-</MainLayout>
+</Base>
 
 <style>
   .animate-in {
