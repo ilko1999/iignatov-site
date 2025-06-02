@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 
-import cloudflare from '@astrojs/cloudflare';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,5 +16,9 @@ export default defineConfig({
   },
 
   integrations: [react(), mdx()],
-  adapter: cloudflare(),
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
 });

@@ -13,6 +13,7 @@
     "@astrojs/mdx": "^4.2.4",
     "@astrojs/react": "^4.2.4",
     "@astrojs/rss": "^4.0.11",
+    "@astrojs/vercel": "^8.1.4",
     "@tailwindcss/vite": "^4.1.4",
     "@vercel/analytics": "^1.5.0",
     "astro": "^5.7.4",
