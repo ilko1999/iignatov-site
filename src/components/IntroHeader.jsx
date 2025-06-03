@@ -68,12 +68,16 @@ const IntroHeader = () => {
         </motion.h1>
 
         <motion.p className="text-lg mb-4 font-light" variants={itemVariants}>
-          25-year-old software developer from <span className="font-bold ">Bulgaria 🇧🇬</span>
+          25-year-old software developer from <span className="font-bold ">Bulgaria</span>
         </motion.p>
 
         <motion.p className="text-md mb-6 font-light" variants={itemVariants}>
           I like to develop full-stack, drink V60 coffee and use my white scottish fold cat{' '}
-          <span className="font-bold">(Mochi)</span> as a rubber ducky.
+          <span className="font-bold">(Mochi)</span> as a rubber ducky. Addicted to{' '}
+          <a href="https://swipemines.com" target="_blank" className="link link-secondary">
+            minesweeper
+          </a>
+          .
         </motion.p>
       </motion.div>
 
